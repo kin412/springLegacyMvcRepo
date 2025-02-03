@@ -27,7 +27,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -42,7 +42,7 @@ public class HomeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/homeTest")
+	@RequestMapping(value = "/homeTest.do")
 	public String homeTest(HttpServletRequest request) {
 		//Map<String, Object>
 		System.out.println("homeTest start");
