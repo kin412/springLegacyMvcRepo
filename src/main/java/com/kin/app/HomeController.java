@@ -19,13 +19,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kin.login.controller.loginController;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Handles requests for the application home page.
  */
+@Slf4j
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private String logTest = "logTest";
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -33,6 +39,8 @@ public class HomeController {
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		System.out.println("loginController println : " + logTest );
+		log.info(" info log={}", logTest);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -49,6 +57,13 @@ public class HomeController {
 	@RequestMapping(value = "/getParameterMap.do")
 	public String getParameterMap(HttpServletRequest request, @RequestParam String conChk_text3) {
 		//Map<String, Object>
+		
+		System.out.println("loginController println : " + logTest );
+		
+		//log.trace(" trace log={}", logTest);
+		//log.debug(" debug log={}", logTest);
+		log.info(" info log={}", logTest);
+		
 		System.out.println("getParameterMap start");
 		//System.out.println("----request : " + request.getParameter("conChk_text2"));
 		

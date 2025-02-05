@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.sidenav {
+  height: 80%;
+  width: 70;
+  display:block;
+  position: fixed;
+  /*z-index: 1;*/
+  top: 0;
+  left: 0;
+  background-color: #FCEDAA;
+  /* overflow-x: hidden;
+  transition: 0.5s; */
+  padding-top: 60px;
+}
+
+.mainContent{
+	padding-left: 200px;
+	padding-rigth: 100px;
+	padding-top : 100px;
+	padding-bottom : 100px;
+	padding : 100px;
+}
