@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!--
+	util property DEVLIMA. #{propertyID['key']} 형식으로 값을 가져올 수있다.
+	JAVA or XML @Value(#{propertyID['key']}) 형식으로 값을 얻을 수
+	spring el <spring:eval expression="@propertyID['key']" /> 형식으로 값을 얻을 수 있다.
+	-->
+	<!--
+	<util:properties id="systemProp" location="classpath:/props/system.properties"/>
+	<util:properties id="dbProp" location="classpath:/props/db_#{systemProp['system.deploy.mode']}.properties"/>
+	<util:properties id="props" location="classpath:/props/props_#{systemProp['system.deploy.mode']}.properties"/>
+	-->
+	
+	<util:properties id="systemProp" location="/WEB-INF/spring/props/system.properties"/>
+	<util:properties id="dbProp" location="/WEB-INF/spring/props/db_#{systemProp['system.deploy.mode']}.properties"/>
+	
+	<!-- <context:property-placeholder properties-ref="props" /> -->
+	
+</beans>

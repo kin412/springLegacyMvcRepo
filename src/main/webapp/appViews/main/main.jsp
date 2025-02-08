@@ -20,23 +20,36 @@
 		});
 		
 		//json
-		function jsonChk(){
-			console.log("--jsonChk in")
-	    	var queryString = $("#conChk_form").serializeArray();
-			$("#serializeArray").val("");
-			$("#stringify").val("");
+		function searchFunc(){
+			console.log("--searchFunc in")
+	    	var queryString = $("#search_form").serializeArray();
 	    	$.ajax({
-				url:"<c:url value='/jsonChk.do'/>",
+				url:"<c:url value='/main/search.do'/>",
 				type:'post',
 				data:queryString,
 				dataType : "json",
 				success: function(data, status) {
-					var list1 = data.t1;
-					var list2 = data.t2;
-					var list3 = data.t3;
-					console.log("List1 : " + list1);
-					console.log("List2 : " + list2);
-					console.log("List3 : " + list3);
+					var html = '';
+					var seq = '';
+					data.forEach((row) => {
+						
+						/*seq = row.seq;
+					    html += '<tr ondblclick ="selectDetail(\''+row.id+'\');">';
+				    	html += '<td onclick="event.cancelBubble=true;"><input type="checkbox" name="chkFlg" value="'+row.id+'"></td>';
+					    html += '<td>'+ row.no +'</td>';
+					    html += '<td class="tll title">'+row.id+'</td>';
+					    html += '<td>'+ row.name +'</td>';
+					    html += '<td>'+ row.buseo_name +'</td>';
+					    html += '<td>'+ row.acc_date +'</td>';
+					    html += '<td>'+ row.reg_date +'</td>';
+					    html += '</tr>';*/
+					   	
+					    html += row.seq + " || " + row.title + " || " + row.writer + " || " + row.regdate + " || " + row.cnt +"<br>"
+						
+					});
+					
+					$("#board").empty();
+					$("#board").append(html);
 					
 				},
 				error: function (data, status, e) {
@@ -57,5 +70,16 @@
 <body>
 	화면이동 시<br>
 	<button type="button" id="mainBtn" onclick="mainFunc();"> 화면 이동</button>
+	<br>
+	<form id="search_form" name="search_form" >
+		제목 <input type='text' id='title' name='title' value=''/>
+		<br>
+		<button type="button" id="searchBtn" onclick="searchFunc();"> 검색</button>
+	</form>
+	
+	<div id="board">
+		
+	</div>
+	
 </body>
 </html>

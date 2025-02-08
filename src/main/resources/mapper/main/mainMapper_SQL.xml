@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kin.main.service.impl.mainMapper">
+
+	<!-- 전체 내용 조회 -->
+	<select id="search" parameterType="mainVo" resultType="mainVo">
+	  SELECT SEQ, 
+	  		 TITLE, 
+	  		 WRITER, 
+	  		 CONTENT, 
+	  		 TO_CHAR(REGDATE, 'YYYY-MM-DD') AS REGDATE, 
+	  		 CNT
+	  FROM BOARD
+	  WHERE 1=1
+	  <if test="title != null and title != ''">
+	  	AND TITLE LIKE '%'||#{title}||'%'
+	  </if>	
+	  ORDER BY SEQ DESC
+	</select>
+
+</mapper>
