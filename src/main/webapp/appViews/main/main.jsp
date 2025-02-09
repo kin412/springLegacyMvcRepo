@@ -13,9 +13,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			$("#currentPage").val("1");
+			//searchPgFunc(${currentPage});
 			searchPgFunc(1);
-			
 	    });
 		
 		$(function() {
@@ -65,8 +64,9 @@
 		
 		//조회
 		function searchPgFunc(currentPage){
-			console.log("currentPage.val : " + $("#currentPage").val());
-			console.log("js currentPage: " + currentPage);
+			
+			$("#currentPage").val(currentPage);
+			
 	    	var queryString = $("#search_form").serializeArray();
 	    	$.ajax({
 				url:"<c:url value='/main/searchPg.do'/>",
@@ -82,10 +82,10 @@
 					boardList.forEach((row) => {
 						
 						seq = row.seq;
-					    html += '<tr class="dtRow" onclick ="selectDetail(\''+seq+'\');">';
+					    html += '<tr class="dtRow">';
 				    	//html += '<td onclick="event.cancelBubble=true;"><input type="checkbox" name="chkFlg" value="'+row.seq+'"></td>';
 					    html += '<td>'+ seq +'</td>';
-					    html += '<td>'+ row.title +'</td>';
+					    html += '<td onclick ="selectDetail(\''+seq+'\');">'+ row.title +'</td>';
 					    html += '<td>'+ row.writer +'</td>';
 					    html += '<td>'+ row.regdate +'</td>';
 					    html += '<td>'+ row.cnt +'</td>';
@@ -136,6 +136,11 @@
 			}
 		}
 		
+		//수정화면 페이지 전환형
+		function selectDetail(seq){
+			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
+		}
+		
 	</script>
 </head>
 <body>
@@ -147,15 +152,15 @@
 	<form id="search_form" name="search_form" onsubmit="return false;">
 		제목 <input type='text' id='title' class='title' name='title' value=''/>
 		
-		<input type='hidden' id='currentPage' name='currentPage' value='1'/>
+		<input type='hidden' id='currentPage' name='currentPage' value=1/>
 		<input type='hidden' id='pageSize' name='pageSize' value='10'/>
 		
 		<!-- <button type="button" id="searchBtn" onclick="searchFunc();"> 검색</button> -->
 		<button type="button" id="searchPgBtn" onclick="searchPgFunc(1);"> 검색</button>
 	</form>
-	
+	<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
 	<div id="totalCnt"></div>
-	<div >
+	<div>
 		<table>
 			<colgroup>
 				<col style="width: 15%;" />

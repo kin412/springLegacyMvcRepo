@@ -28,5 +28,54 @@
 	  	AND TITLE LIKE '%'||#{title}||'%'
 	  </if>	
 	</select>
+	
+	<!-- 글 상세 조회 -->
+	<select id="selectDetail" parameterType="int" resultType="mainVo">
+	  SELECT SEQ, 
+	  		 TITLE, 
+	  		 WRITER, 
+	  		 CONTENT, 
+	  		 TO_CHAR(REGDATE, 'YYYY-MM-DD') AS REGDATE, 
+	  		 CNT
+	  FROM BOARD
+	  WHERE SEQ = #{seq}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateDetail" parameterType="mainVo">
+		UPDATE BOARD
+		SET
+			TITLE = #{title},
+			CONTENT = #{content}
+		WHERE SEQ = #{seq}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteDetail" parameterType="mainVo">
+		DELETE FROM BOARD WHERE SEQ=#{seq}
+	</delete>
+	
+	<!-- 글등록 -->
+	<insert id="insertDetail" parameterType="mainVo">
+		INSERT INTO BOARD (
+			SEQ, 
+			TITLE, 
+			WRITER, 
+			CONTENT, 
+			REGDATE, 
+			CNT
+		) VALUES (
+			BOARD_SEQ.NEXTVAL, 
+			#{title}, 
+			'임시', 
+			#{content}, 
+			SYSDATE, 
+			0)
+	</insert>
+	
+	<!-- 마지막 글번호 -->
+	<select id="maxSeq" resultType="int">
+	  SELECT MAX(SEQ) FROM BOARD
+	</select>
 
 </mapper>

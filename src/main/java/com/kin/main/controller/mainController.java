@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,17 @@ public class mainController {
 	private mainService mainService;
 
 	@RequestMapping(value = "/main/main.do")
-	public String main() {
+	public String main(@ModelAttribute mainVo mainVo, ModelMap modal) {
+		
+		/*int currentPage = mainVo.getCurrentPage();
+		
+		System.out.println("--currentPage : " + currentPage);
+		
+		if(currentPage == 0) {
+			modal.addAttribute("currentPage", 1);
+		}else {
+			
+		}*/
 		return "main/main";
 	}
 	
@@ -42,5 +53,40 @@ public class mainController {
 		
 		return mainService.searchPg(mainVo);
 	}
+	
+	//수정화면 페이지 전환형 modelMap으로 vo 전달하기
+	@RequestMapping(value = "/main/selectDetail.do")
+	public String selectDetail(@ModelAttribute mainVo mainVo, ModelMap modal) {
+		
+		int seq = mainVo.getSeq();
+		System.out.println("--seq : " + seq);
+		if(seq != 0) {
+			//수정
+			modal.addAttribute("detail", mainService.selectDetail(seq));
+		}else {
+			//등록
+			mainVo.setSeq(0);
+			modal.addAttribute("detail", mainVo);
+		}
+		
+		return "main/selectDetail";
+	}
+	
+	//등록&수정
+	@ResponseBody
+	@RequestMapping(value = "/main/createAndUpdateDetail.do")
+	public Map<String, Object> createAndUpdateDetail(@ModelAttribute mainVo mainVo) {
+		
+		return mainService.createAndUpdateDetail(mainVo);
+	}
+	
+	//삭제
+	@ResponseBody
+	@RequestMapping(value = "/main/deleteDetail.do")
+	public Map<String, Object> deleteDetail(@ModelAttribute mainVo mainVo) {
+		
+		return mainService.deleteDetail(mainVo);
+	}
+	
 	
 }
