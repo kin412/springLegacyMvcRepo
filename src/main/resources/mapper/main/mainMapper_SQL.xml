@@ -16,6 +16,17 @@
 	  	AND TITLE LIKE '%'||#{title}||'%'
 	  </if>	
 	  ORDER BY SEQ DESC
+	  OFFSET (#{currentPage}-1)*#{pageSize} ROWS FETCH FIRST #{pageSize} ROWS ONLY
+	</select>
+	
+	<!-- 검색된 갯수 -->
+	<select id="totalCnt" parameterType="mainVo" resultType="int">
+	  SELECT COUNT(*)
+	  FROM BOARD
+	  WHERE 1=1
+	  <if test="title != null and title != ''">
+	  	AND TITLE LIKE '%'||#{title}||'%'
+	  </if>	
 	</select>
 
 </mapper>

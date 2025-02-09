@@ -1,6 +1,7 @@
 package com.kin.main.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,6 @@ public class mainController {
 
 	@RequestMapping(value = "/main/main.do")
 	public String main() {
-		System.out.println("--test");
 		return "main/main";
 	}
 	
@@ -31,9 +31,16 @@ public class mainController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/main/search.do")
-	public List<mainVo> dbChk(@ModelAttribute mainVo mainVo) {
+	public List<mainVo> search(@ModelAttribute mainVo mainVo) {
 		
 		return mainService.search(mainVo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/main/searchPg.do")
+	public Map<String, Object> searchPg(@ModelAttribute mainVo mainVo) {
+		
+		return mainService.searchPg(mainVo);
 	}
 	
 }

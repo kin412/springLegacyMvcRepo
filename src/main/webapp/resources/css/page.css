@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.dtRow td{
+	text-align: center;
+}
+
+.pageList li{
+	float:left;
+	display:block;
+}
+
+li.on{
+	/*display : inline;*/
+	font-weight: bold;
+}
+
+.beforePageBtn{
+	float:left;
+}

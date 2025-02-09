@@ -7,3 +7,14 @@ CREATE TABLE "BOARD"
 "CNT" NUMBER(5,0) DEFAULT 0, 
 PRIMARY KEY ("SEQ")
 ) ;
+
+CREATE SEQUENCE BOARD_SEQ
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       MAXVALUE 9999
+       NOCYCLE
+       NOCACHE
+       NOORDER;
+       
+      commit;
