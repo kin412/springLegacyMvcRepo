@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="false" %>
 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+
 
 
 <html>
@@ -64,7 +65,7 @@
 		
 		//조회
 		function searchPgFunc(currentPage){
-			
+			console.log("--searchPgFunc")
 			$("#currentPage").val(currentPage);
 			
 	    	var queryString = $("#search_form").serializeArray();
@@ -141,14 +142,16 @@
 			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
 		}
 		
+		function goLogout(){
+			location.href="/app/logout/logout.do";
+		}
+		
 	</script>
 </head>
 <body>
-	<!--
-	화면이동 시<br>
-	<button type="button" id="mainBtn" onclick="mainFunc();"> 화면 이동</button>
-	-->
-	<br>
+
+	<button type="button" id="logoutBtn" onclick="goLogout()">로그아웃</button>
+	
 	<form id="search_form" name="search_form" onsubmit="return false;">
 		제목 <input type='text' id='title' class='title' name='title' value=''/>
 		

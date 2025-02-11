@@ -22,6 +22,8 @@ public class mainController {
 	@RequestMapping(value = "/main/main.do")
 	public String main(@ModelAttribute mainVo mainVo, ModelMap modal) {
 		
+		System.out.println("--main/main.do");
+		
 		/*int currentPage = mainVo.getCurrentPage();
 		
 		System.out.println("--currentPage : " + currentPage);
@@ -50,7 +52,7 @@ public class mainController {
 	@ResponseBody
 	@RequestMapping(value = "/main/searchPg.do")
 	public Map<String, Object> searchPg(@ModelAttribute mainVo mainVo) {
-		
+		System.out.println("--/main/searchPg.do");
 		return mainService.searchPg(mainVo);
 	}
 	

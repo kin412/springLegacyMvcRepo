@@ -12,8 +12,33 @@
 		<put-attribute name="foot" value="/appViews/tiles/footerTemplate.jsp" />
 	</definition>
 	
+	<!-- tiles - 로그인 제외 -->
+	<definition name="empty" template="/appViews/login/login.jsp">
+        <put-attribute name="content" value=""/>  
+    </definition>
+    
+    <!-- tiles - error 제외 -->
+	<definition name="errorEmpty" template="/appViews/error/accessError.jsp">
+        <put-attribute name="content" value=""/>  
+    </definition>
+    
+    
+    <!--  -->
+    
+	<!-- tiles- error 제외 -->
+	<definition name="error/*" extends="errorEmpty">
+        <put-attribute name="content" value="/appViews/error/{1}.jsp"/>  
+    </definition>
+    
+	<!-- tiles- 로그인 제외 -->
+	<definition name="login/*" extends="empty">
+        <put-attribute name="content" value="/appViews/login/{1}.jsp"/>  
+    </definition>
+	
+	<!-- main layout -->
 	<definition name="*/*" extends="layout-tiles">
 		<put-attribute name="body" value="/appViews/{1}/{2}.jsp" />
 		<put-attribute name="title" value="board" />
 	</definition>
+	
 </tiles-definitions>

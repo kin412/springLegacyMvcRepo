@@ -8,9 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class loginController {
-
-	@RequestMapping(value = "/login.do")
+	
+	@RequestMapping(value = "/login/login.do")
 	public String login() {
+		System.out.println("-- /login/login.do");
 		
 		return "login/login";
 	}
