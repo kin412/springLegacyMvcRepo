@@ -142,15 +142,9 @@
 			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
 		}
 		
-		function goLogout(){
-			location.href="/app/logout/logout.do";
-		}
-		
 	</script>
 </head>
 <body>
-
-	<button type="button" id="logoutBtn" onclick="goLogout()">로그아웃</button>
 	
 	<form id="search_form" name="search_form" onsubmit="return false;">
 		제목 <input type='text' id='title' class='title' name='title' value=''/>

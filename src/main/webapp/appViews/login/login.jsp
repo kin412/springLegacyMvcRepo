@@ -25,6 +25,8 @@
 	<table>
 		<tbody>
 			<form action="/app/login" method="post">
+				<!-- <security:csrf disabled="true"/>가 없다면 로그인 처리시 csrf가 있어야함 -->
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<tr>
 					<td>ID</td>
 					<td><input type="text" name="id"></td>
@@ -36,8 +38,7 @@
 					<td>PW</td>
 					<td><input type="password" name="pw"></td>
 					<td>
-						<!-- <security:csrf disabled="true"/>가 없다면 로그인 처리시 csrf가 있어야함 -->
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						
 					</td>
 				</tr>
 				<tr>

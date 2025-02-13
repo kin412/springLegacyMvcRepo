@@ -25,7 +25,7 @@
     <!-- 전자정부와 ibatis를 사용하지 않아 @mapper 어노테이션을 사용하지 못할 경우 -->
     <mybatis-spring:scan base-package="com.kin.**.service.impl"  />
     
-    <!-- DB정보를 가지는 datasource 빈객체 생성 -->
+    <!-- DB정보를 가지는 datasource 빈객체 생성 --> 
     <!-- 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false">
 	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />

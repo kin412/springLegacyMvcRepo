@@ -9,9 +9,9 @@
 <body>
 
 	로그아웃
-	<form action="/app/logout" method="post">
-		<!-- 로그아웃 처리시에도 csrf가 있어야함 -->
-		<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+	<form action="/app/logout" method="POST">
+		<!-- <security:csrf disabled="true"/>가 없다면 로그아웃 처리시 csrf가 있어야함 -->
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<button type="submit">로그아웃임?</button>
 	</form>
 

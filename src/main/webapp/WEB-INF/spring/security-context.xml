@@ -19,7 +19,7 @@
 		<security:access-denied-handler ref="custumAccessDeniedHandler"/>
 		<!-- <security:access-denied-handler error-page="/error/accessError.do"/> -->
 		
-		<!-- login-processing-url="/app/login"  -->
+		<!-- login-processing-url="/app/login" - form의 action과 동일한 값. 근데 둘다 넣으면 안됨. -->
 		<security:form-login 
 			username-parameter="id" 
 			password-parameter="pw"
@@ -28,9 +28,8 @@
 			authentication-failure-handler-ref="custumAccessFailHandler"
 		/>
 		
-		<!-- 아직 안됨 -->
+		<!-- logout-url - form의 action과 동일한 값. 근데 둘다 넣으면 안됨.-->
 		<security:logout
-			logout-url="/app/logout"
 			logout-success-url="/main/main.do"
 			invalidate-session="true"
 			delete-cookies="JSESSIONID"

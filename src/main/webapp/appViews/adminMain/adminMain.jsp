@@ -6,14 +6,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<script type="text/javascript">
-		function logoutBtnClick(){
-				location.href = "/app/login/custumLogout.do";
-			}
+		
 	</script>
 </head>
 <body>
 
 	관리자 메인페이지 
-	<button type="button" style="float: right;" onclick="logoutBtnClick()">로그아웃</button>
+	
 </body>
 </html>

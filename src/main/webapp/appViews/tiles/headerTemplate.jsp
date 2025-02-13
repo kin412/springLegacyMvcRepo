@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="Header">Header</div>
+	<div class="Header">
+		Header<br>
+		<div style="float:right">
+			<form action="/app/logout" method="POST">
+				<!-- <security:csrf disabled="true"/>가 없다면 로그아웃 처리시 csrf가 있어야함 -->
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<button type="submit">로그아웃</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
