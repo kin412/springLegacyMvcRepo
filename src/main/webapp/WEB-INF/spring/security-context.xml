@@ -10,6 +10,8 @@
 	<bean id="custumLoginSuccessHandler" class="com.kin.securityHandler.custumLoginSuccessHandler"/>
 	<bean id="custumLogoutSuccessHandler" class="com.kin.securityHandler.custumLogoutSuccessHandler"/>
 	
+	<bean id="custumUserDetailServiceImpl" class="com.kin.member.service.impl.custumUserDetailServiceImpl"/>
+	
 	<!-- use-expressions="false" -> access="ROLE_ADMIN" -->
 	<security:http>
 	
@@ -19,7 +21,7 @@
 		<security:access-denied-handler ref="custumAccessDeniedHandler"/>
 		<!-- <security:access-denied-handler error-page="/error/accessError.do"/> -->
 		
-		<!-- login-processing-url="/app/login" - form의 action과 동일한 값. 근데 둘다 넣으면 안됨. -->
+		<!-- login-processing-url="/app/login" - form의 action과 동일한 값. 근데 둘다 넣으면 안됨? -->
 		<security:form-login 
 			username-parameter="id" 
 			password-parameter="pw"
@@ -28,7 +30,7 @@
 			authentication-failure-handler-ref="custumAccessFailHandler"
 		/>
 		
-		<!-- logout-url - form의 action과 동일한 값. 근데 둘다 넣으면 안됨.-->
+		<!-- logout-url - form의 action과 동일한 값. 근데 둘다 넣으면 안됨?-->
 		<security:logout
 			logout-success-url="/main/main.do"
 			invalidate-session="true"
@@ -39,6 +41,29 @@
 		
 	</security:http>
 	
+	
+	<!-- custumUserDetailService -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="custumUserDetailServiceImpl">
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<!-- 쿼리를 이용한 인증 -->
+	<!-- 
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="SELECT SEQ, USERID, USERPW, ENABLED FROM MEMBER WHERE SEQ = ?"
+				authorities-by-username-query="SELECT SEQ, AUTH FROM MEMBER_AUTH WHERE SEQ = ?"
+			/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	-->
+	
+	<!-- DB연결 안했을때 테스트 -->
+	<!-- 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
@@ -47,5 +72,6 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-
+	-->
+	
 </beans>
