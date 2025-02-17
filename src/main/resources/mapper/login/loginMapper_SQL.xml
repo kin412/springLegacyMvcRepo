@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kin.login.service.impl.loginMapper">
+
+	<!-- ID 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+	  SELECT COUNT(*) 
+	  FROM MEMBER 
+	  WHERE USERID = LOWER(#{userid})
+	</select>
+	
+	<!-- 회원가입 - 회원정보 -->
+	<insert id="insertMember" parameterType="memberVo">
+		INSERT INTO MEMBER (
+			USERID, 
+			USERPW, 
+			USERNAME, 
+			REGDATE, 
+			UPDATEDATE,
+			ENABLED
+		) VALUES (
+			#{userid}, 
+			#{userpw}, 
+			#{username}, 
+			SYSDATE, 
+			SYSDATE, 
+			1
+		)
+	</insert>
+	
+	<!-- 회원가입 - 권한 -->
+	<insert id="insertAuth" parameterType="memberVo">
+		INSERT INTO MEMBER_AUTH (
+			USERID, 
+			AUTH
+		) VALUES (
+			#{userid}, 
+			'ROLE_USER'
+		)
+	</insert>
+
+</mapper>

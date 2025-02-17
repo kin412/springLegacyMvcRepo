@@ -9,7 +9,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">	
 		function backToLogin(){
 			location.href = "<c:url value='/login/login.do'/>";

@@ -8,8 +8,9 @@
 
 <html>
 <head>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<!-- <script type="text/javascript" src="<c:url value='/js/jquery-1.12.4.min.js' />"></script> -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/css/page.css" rel="stylesheet">
 	<script type="text/javascript">	
 	
