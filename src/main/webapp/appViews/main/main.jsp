@@ -11,6 +11,7 @@
 	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<!-- <script type="text/javascript" src="<c:url value='/js/jquery-1.12.4.min.js' />"></script> -->
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common/com-function.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/css/page.css" rel="stylesheet">
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -117,26 +118,6 @@
 				}
 			});
 	    }
-		
-		function pageChange(page){
-			searchPgFunc(page);
-		}
-		
-		function beforePageBtnClick(){
-			if($("#beforePageBtn").val() != 0){
-				searchPgFunc($("#beforePageBtn").val());
-			}else{
-				alert("첫 번째 페이지 입니다.");
-			}
-		}
-		
-		function afterPageBtnClick(){
-			if($("#afterPageBtn").val() != 0){
-				searchPgFunc($("#afterPageBtn").val());
-			}else{
-				alert("마지막 페이지 입니다.");
-			}
-		}
 		
 		//수정화면 페이지 전환형
 		function selectDetail(seq){

@@ -2,6 +2,30 @@
  * 공통 function
  */
 
+//페이징 - 번호 버튼 클릭 시
+function pageChange(page){
+	searchPgFunc(page);
+}
+
+//페이징 - 이전 버튼 클릭 시
+function beforePageBtnClick(){
+	if($("#beforePageBtn").val() != 0){
+		searchPgFunc($("#beforePageBtn").val());
+	}else{
+		alert("첫 번째 페이지 입니다.");
+	}
+}
+
+//페이징 - 다음 버튼 클릭 시
+function afterPageBtnClick(){
+	if($("#afterPageBtn").val() != 0){
+		searchPgFunc($("#afterPageBtn").val());
+	}else{
+		alert("마지막 페이지 입니다.");
+	}
+}
+
+
 //팝업 열기
 function openPop(param) {
 	document.getElementById("popup_layer"+param).style.display = "block";
