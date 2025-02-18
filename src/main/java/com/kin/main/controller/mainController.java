@@ -3,6 +3,9 @@ package com.kin.main.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +30,7 @@ public class mainController {
 
 	/*@Secured, @PreAuthorize @PostAuthorize  - 스프링 시큐리티 어노테이션  xml의 설정대신 사용가능, bean설정도 있음*/
 	@RequestMapping(value = "/main/main.do")
-	public String main(@ModelAttribute mainVo mainVo, ModelMap modal) {
+	public String main(@ModelAttribute mainVo mainVo, ModelMap modal, HttpServletRequest request) {
 		
 		System.out.println("--main/main.do");
 		
@@ -49,6 +52,15 @@ public class mainController {
 		}else {
 			
 		}*/
+		
+		/*
+		 * 세션 설정 예시
+		HttpSession session = request.getSession();
+		session.setAttribute("testInfomation", "testInfomationValue");
+		
+		System.out.println("session : " + session.getAttribute("testInfomation"));
+		*/
+		
 		return "main/main";
 	}
 	
