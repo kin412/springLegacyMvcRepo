@@ -6,12 +6,11 @@
 <%@ page session="false" %>
 
 
-<html>
+<html lang="kr">
 <head>
 	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<!-- <script type="text/javascript" src="<c:url value='/js/jquery-1.12.4.min.js' />"></script> -->
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/css/page.css" rel="stylesheet">
 	<script type="text/javascript">	
 	
@@ -21,43 +20,10 @@
 		
 		$(function() {
 			
-			var ckeditor_config = {
-		            width: "100%",
-		            height:"400px",
-		            image_previewText: '이미지 미리보기',
-		            resize_enabled : false,
-		            enterMode : CKEDITOR.ENTER_BR,
-		            shiftEnterMode : CKEDITOR.ENTER_P,
-		            filebrowserUploadUrl : "<c:url value='/main/ckeditorFileUpload.do'/>"
-		    };
-		
-		    CKEDITOR.replace("contentArea", ckeditor_config);
-		    
-		  //이미지 업로드가 끝나고 실행하는 함수
-		    CKEDITOR.on( 'dialogDefinition', function( ev ) {
-		        // Take the dialog name and its definition from the event data.
-		        let dialogName = ev.data.name;
-		        let dialogDefinition = ev.data.definition;
-		
-		        let uploadTab = dialogDefinition.getContents( 'Upload' );
-		        let uploadButton = uploadTab.get('uploadButton');
-		
-		        uploadButton['filebrowser']['onSelect'] = function( fileUrl, errorMessage ) {
-		
-		        }
-		
-		    });
-		  
 		});
 		
 		//등록, 수정 화면에 따른 화면 조절
 		function initPage(){
-			
-			var title = $("#hiddenTitle").val();
-			var content = $("#hiddenContent").val();
-			
-			console.log("title : " + title);
-			console.log("content : " + content);
 			
 			if(${detail.seq} == '0'){
 				//등록
@@ -72,14 +38,15 @@
 				$("#titleTd").empty();
 				$("#titleTd").append('글 제목 : <input type="text" id="title">');
 				$("#contentTd").empty();
-				$("#contentTd").append('글 내용 : <input type="textarea" id="contentArea" name="contentArea" row="3"></textarea>');
+				$("#contentTd").append('글 내용 : <input type="textarea" id="content">');
+				
 				$("#detailTr").remove();
 				
 				
 			}else{
 				//수정
 				$("#modiButtonSet").hide();
-				$("#ckDiv").hide();
+				console.log("sadas : " + $("#hiddenTitle").val());
 			}
 			
 			
@@ -91,16 +58,10 @@
 			var title = $("#hiddenTitle").val();
 			var content = $("#hiddenContent").val();
 			
-			console.log("title : " + title);
-			console.log("content : " + content);
-			
 			$("#titleTd").empty();
 			$("#titleTd").append('<input type="text" id="title" value="'+title+'">');
-			//$("#contentTd").empty();
-			//$("#contentTd").append('<input type="textarea" id="contentArea" name="contentArea" row="3"></textarea>');
-			//$("#contentArea").val(content);
-			$("#ckDiv").show();
-			CKEDITOR.instances.contentArea.setData(content);
+			$("#contentTd").empty();
+			$("#contentTd").append('<input type="textarea" id="content" value="'+content+'">');
 			
 			$("#basicButtonSet").hide();
 			$("#modiButtonSet").show();
@@ -123,7 +84,6 @@
 				
 				$("#basicButtonSet").show();
 				$("#modiButtonSet").hide();
-				$("#ckDiv").hide();
 			}
 		}
 		
@@ -131,9 +91,9 @@
 		function modiSubmitBtnClick(){
 			
 			$("#hiddenTitle").val($("#title").val());
-			$("#hiddenContent").val(CKEDITOR.instances.contentArea.getData());	
-					
-			var queryString = $("#modify_form").serializeArray();
+			$("#hiddenContent").val($("#content").val());
+			
+	    	var queryString = $("#modify_form").serializeArray();
 	    	$.ajax({
 				url:"<c:url value='/main/createAndUpdateDetail.do'/>",
 				type:'post',
@@ -210,12 +170,7 @@
 						<td>${detail.cnt}</td>
 					</tr>
 					<tr>
-						<td id="contentTd" colspan='4'>
-							${detail.content}
-							<div id="ckDiv">
-								<input type="textarea" id="contentArea" name="contentArea" row="3"></textarea>
-							</div>
-						</td>
+						<td id="contentTd" colspan='4'>${detail.content}</td>
 					</tr>
 				</tbody>
 			</form>
