@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import lombok.Data;
+
+@Data
 public class custumUserVo extends User {
 
 	private static final long serialVersionUID = 1L;

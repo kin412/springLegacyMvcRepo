@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 현페이지의 데이터는 세션에 담지 않겠다. -->
 <%@ page session="false" %>
 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 
 
@@ -137,7 +139,11 @@
 		<!-- <button type="button" id="searchBtn" onclick="searchFunc();"> 검색</button> -->
 		<button type="button" id="searchPgBtn" onclick="searchPgFunc(1);"> 검색</button>
 	</form>
-	<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
+	<!-- security 예시 ROLE_ADMIN인 사용자만 보이게 -->
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<button type="button">관리자 페이지</button>
+	</sec:authorize>
+		<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
 	<div id="totalCnt"></div>
 	<div>
 		<table>

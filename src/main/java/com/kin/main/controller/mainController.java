@@ -25,6 +25,7 @@ public class mainController {
 	@Autowired
 	private mainService mainService;
 
+	/*@Secured, @PreAuthorize @PostAuthorize  - 스프링 시큐리티 어노테이션  xml의 설정대신 사용가능, bean설정도 있음*/
 	@RequestMapping(value = "/main/main.do")
 	public String main(@ModelAttribute mainVo mainVo, ModelMap modal) {
 		
