@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kin.main.service.mainService;
 import com.kin.main.service.mainVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class mainController {
+	
+	//@Slf4j 어노테이션과 역할이 같다
+	//private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private mainService mainService;
@@ -23,6 +29,15 @@ public class mainController {
 	public String main(@ModelAttribute mainVo mainVo, ModelMap modal) {
 		
 		System.out.println("--main/main.do");
+		
+		//log예시
+		/*
+		log.info("--info");
+		log.trace("--trace");
+		log.debug("--debug");
+		log.warn("--warning");
+		log.error("--error");
+		*/
 		
 		/*int currentPage = mainVo.getCurrentPage();
 		
