@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kin.adminFileTest.service.impl.adminFileTestMapper">
+
+	<!-- 파일 조회 -->
+	<select id="adminFileTestList" resultType="adminFileTestVo">
+	  SELECT SEQ, 
+	  		 REAL_FILE_NAME, 
+	  		 CODE_FILE_NAME, 
+	  		 REGDATE 
+	  FROM ADMINFILE
+	  ORDER BY SEQ DESC
+	</select>
+	
+	<!-- maxSeq -->
+	<select id="maxSeq" resultType="int">
+	  SELECT DECODE(MAX(SEQ),NULL,1,MAX(SEQ)) AS SEQ 
+	  FROM ADMINFILE
+	</select>
+	
+	<!-- 파일 정보 등록 -->
+	<insert id="InsertadminFileTest" parameterType="adminFileTestVo">
+		INSERT INTO ADMINFILE (
+			SEQ, 
+			REAL_FILE_NAME, 
+			CODE_FILE_NAME, 
+			REGDATE
+		) VALUES (
+			#{seq}, 
+			#{real_file_name},
+			#{code_file_name}, 
+			SYSDATE)
+	</insert>
+
+</mapper>

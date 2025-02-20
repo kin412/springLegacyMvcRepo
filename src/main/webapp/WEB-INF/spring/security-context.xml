@@ -17,6 +17,7 @@
 	
 		<security:intercept-url pattern="/main/main.do" access="hasRole('ROLE_USER')"/>
 		<security:intercept-url pattern="/adminMain/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/adminFileTest/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<security:access-denied-handler ref="custumAccessDeniedHandler"/>
 		<!-- <security:access-denied-handler error-page="/error/accessError.do"/> -->
