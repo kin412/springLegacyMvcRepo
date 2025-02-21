@@ -3,12 +3,16 @@
 <mapper namespace="com.kin.adminFileTest.service.impl.adminFileTestMapper">
 
 	<!-- 파일 조회 -->
-	<select id="adminFileTestList" resultType="adminFileTestVo">
+	<select id="adminFileTestList" parameterType="adminFileTestVo" resultType="adminFileTestVo">
 	  SELECT SEQ, 
 	  		 REAL_FILE_NAME, 
 	  		 CODE_FILE_NAME, 
 	  		 REGDATE 
 	  FROM ADMINFILE
+	  WHERE 1=1
+	  <if test="seq != null and seq != ''">
+	  	AND SEQ = #{seq}
+	  </if>	
 	  ORDER BY SEQ DESC
 	</select>
 	
@@ -31,5 +35,10 @@
 			#{code_file_name}, 
 			SYSDATE)
 	</insert>
+	
+	<!-- 파일 삭제 -->
+	<delete id="delFile" parameterType="String">
+		DELETE FROM ADMINFILE WHERE SEQ=#{seq}
+	</delete>
 
 </mapper>

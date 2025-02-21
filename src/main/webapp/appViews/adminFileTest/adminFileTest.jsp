@@ -9,9 +9,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script> --%>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common/com-function.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -20,6 +20,51 @@
 		
 		$(function() {
 			
+			//동적으로 생성된 태그에 이벤트 바인딩
+			$(document).on('change', '#allCheck', function(e) {
+				if($("#allCheck").is(":checked")){
+					$("input[name=chk]").prop("checked", true);
+				}else{
+					$("input[name=chk]").prop("checked", false);
+				}
+				
+			});
+			
+			$(document).on('change', 'input:checkbox[name=chk]', function(e) {
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+
+				if(total != checked) $("#allCheck").prop("checked", false);
+				else $("#allCheck").prop("checked", true); 
+				
+			});
+			
+			$(document).on('click', '#delBtn', function(e) {
+				delFile();
+			});
+			
+			//정적 태그에 이벤트 지정
+			/*
+			$("#allCheck").change(function() {
+				console.log("666");
+				if($("#allCheck").is(":checked")){
+					console.log("123");
+					$("input[name=chk]").prop("checked", true);
+				}else{
+					console.log("444");
+					$("input[name=chk]").prop("checked", false);
+				}
+			});
+
+			$("input[name=chk]").click(function() {
+				console.log("??");
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+
+				if(total != checked) $("#allCheck").prop("checked", false);
+				else $("#allCheck").prop("checked", true); 
+			});
+			*/
 			
 		});
 		
@@ -37,14 +82,17 @@
 						html += "첨부된 파일이 없습니다.";
 					}else{
 						html +="첨부된 파일 리스트 <br>"
+						html +="<input type='checkbox' id='allCheck' name='allCheck'/><br>"
 						data.forEach((row) => {
-						    html += "<input type='checkbox' name='cb'>	"+ row.seq + " || ";
+						    html += "<input type='checkbox' name='chk' value='"+row.seq+"'> "+row.seq+"|| ";
 						    html += '<a onclick="fileDown(\''+row.real_file_name+'\',\''+row.code_file_name+'\')">';
 						    html += row.real_file_name + '</a> || ';
 						    html += row.code_file_name + " || " + row.regdate + "<br>";
 						});
 						
 					}
+					
+					html += "<button type='button' id='delBtn'>선택한 파일 삭제</button> <br>";
 					
 					$("#fileList").empty();
 					$("#fileList").append(html);
@@ -98,7 +146,7 @@
 		}
 		
 		//다운로드는 ajax와 form인경우 두가지가 다르다
-		//1. ajax
+		//1. ajax - 이거 하려면 제이쿼리 버전이 3.3.1 이상이어야함
 		function fileDown(realFileName, codeFileName){
 			console.log("--realFileName : " + realFileName);
 			console.log("--codeFileName : " + codeFileName);
@@ -141,6 +189,54 @@
 			
 		}
 		
+		function delFile(){
+			var checked = $("input[name=chk]:checked").length;
+			console.log("--checked : " + checked);
+			
+			var tempArr = $("input[name=chk]:checked").serializeArray();
+			console.log(tempArr);
+			
+			/*tempArr.forEach(element => {
+				console.log("--element :");
+				console.log(element);
+			});*/
+			
+			if(checked == 0){
+				alert("삭제할 파일을 선택해 주세요.");
+			}else{
+				if(confirm("선택한 파일을 삭제 하시겠습니까?")){
+					
+					$.ajax({
+						url:"<c:url value='/adminFileTest/delFile.do'/>",
+						type:'post',
+						data:tempArr,
+						dataType : "json",
+						success: function(data, status) {
+							console.log("data : " + data);
+							
+							if(data == 'true'){
+								alert("파일이 삭제되었습니다.");
+							}else{
+								alert("파일 삭제 에러. 관리자에게 문의하세요.");
+							}
+							
+							
+							fileList();
+							
+						},
+						error: function (data, status, e) {
+							console.log(data); 
+							console.log("실패");
+						}
+					});
+					
+				}else{
+					return;
+				}
+			}
+			
+		}
+		
 	</script>
 </head>
 <body>
@@ -173,7 +269,7 @@
 		</form>
 		-->
 		
-		<!-- 파일 두개이상 붙히는거 -->
+		<!-- 파일 두개이상 선택 multiple-->
 		<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data">
 			파일 선택 : <input type="file" multiple="multiple" name="uploadFiles"> 
 			<button type="button" onclick ="fileUpload()">업로드</button>

@@ -2,10 +2,13 @@ package com.kin.adminFileTest.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -115,8 +118,7 @@ public class adminFileTestController {
 		
 	}
 	
-	//<a href="${pageContext.request.contextPath}/adminFileTest/fileDown2.do?fileName=ac4aca6e-94ea-46db-84ee-c1c4c5e00a7d_키디언_테스트이미지.jpg"> 테스트키디언</a>
-	//get요청1
+	//파일 다운로드 get요청1
 	//produces = MediaType.APPLICATION_OCTET_STREAM_VALUE 이거 없어도 되는데??
 	@ResponseBody
 	@RequestMapping(value = "/adminFileTest/fileDown.do", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
@@ -161,9 +163,7 @@ public class adminFileTestController {
 		
 	}
 	
-	
-	
-		
+	//파일다운로드 get요청2
 	@ResponseBody
 	@RequestMapping(value = "/adminFileTest/fileDown2.do")
 	public void fileDown2(@ModelAttribute adminFileTestVo adminFileTestVo, HttpServletResponse response) throws IOException {
@@ -238,7 +238,13 @@ public class adminFileTestController {
 			
 		}
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/adminFileTest/delFile.do")
+	public boolean delFile(HttpServletRequest request) {
 		
+		return adminFileTestService.delFile(request);
 	}
 	
 }
