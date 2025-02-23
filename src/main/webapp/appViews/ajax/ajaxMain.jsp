@@ -227,7 +227,6 @@
 			
 			<button type="button" onclick="usePromiseBeforeFunc()">promise before</button>
 			<button type="button" onclick="promiseAfterFunc()">promise after</button>
-			<button type="button" onclick="promiseAfterFunc()">promise after</button>
 			<button type="button" onclick="asyncAwaitFunc()">async await</button>
 			<button type="button" onclick="fetchFunc()">fetch</button>
 		</div>

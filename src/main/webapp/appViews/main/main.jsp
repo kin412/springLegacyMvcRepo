@@ -126,6 +126,24 @@
 			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
 		}
 		
+		//구글 smtp 메일 보내기
+		function sendEmail(){
+			$.ajax({
+				url:"<c:url value='/sendMail/sendMail.do'/>",
+				type:'get',
+				//data:queryString,
+				//dataType : "json",
+				success: function(data, status) {
+					alert("메일이 정상적으로 전송 되었습니다.");
+					
+				},
+				error: function (data, status, e) {
+					console.log(data); 
+					console.log("실패");
+				}
+			});
+		}
+		
 	</script>
 </head>
 <body>
@@ -138,6 +156,10 @@
 		<!-- <button type="button" id="searchBtn" onclick="searchFunc();"> 검색</button> -->
 		<button type="button" id="searchPgBtn" onclick="searchPgFunc(1);"> 검색</button>
 	</form>
+		<!-- security 예시 ROLE_ADMIN인 사용자만 보이게 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<button type="button" onclick="sendEmail()">메일보내기</button><br>
+		</sec:authorize>
 		<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
 	<div id="totalCnt"></div>
 	<div>
