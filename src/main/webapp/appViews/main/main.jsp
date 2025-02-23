@@ -126,15 +126,9 @@
 			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
 		}
 		
-		//관리자 파일첨부 테스트
-		function adminFileTest(){
-			location.href = "<c:url value='/adminFileTest/adminFileTest.do'/>";
-		}
-		
 	</script>
 </head>
 <body>
-	
 	<form id="search_form" name="search_form" onsubmit="return false;">
 		제목 <input type='text' id='title' class='title' name='title' value=''/>
 		
@@ -144,10 +138,6 @@
 		<!-- <button type="button" id="searchBtn" onclick="searchFunc();"> 검색</button> -->
 		<button type="button" id="searchPgBtn" onclick="searchPgFunc(1);"> 검색</button>
 	</form>
-	<!-- security 예시 ROLE_ADMIN인 사용자만 보이게 -->
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<button type="button" onclick="adminFileTest()">관리자 첨부파일 테스트 페이지</button>
-	</sec:authorize>
 		<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
 	<div id="totalCnt"></div>
 	<div>

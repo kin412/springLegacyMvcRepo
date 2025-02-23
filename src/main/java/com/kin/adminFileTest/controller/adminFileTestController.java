@@ -44,7 +44,7 @@ public class adminFileTestController {
 	@RequestMapping(value = "/adminFileTest/adminFileTest.do")
 	public String adminFileTest() {
 		
-		System.out.println("--main/main.do");
+		log.info("--/adminFileTest/adminFileTest.do");
 		
 		return "adminFileTest/adminFileTest";
 	}
