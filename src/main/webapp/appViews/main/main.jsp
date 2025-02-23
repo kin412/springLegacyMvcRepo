@@ -12,7 +12,8 @@
 <head>
 	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<!-- <script type="text/javascript" src="<c:url value='/js/jquery-1.12.4.min.js' />"></script> -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/jquery-1.12.4.min.js"></script> --%>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common/com-function.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/css/page.css" rel="stylesheet">
 	<script type="text/javascript">
@@ -144,6 +145,63 @@
 			});
 		}
 		
+		//엑셀 업로드
+		function excelUploadProcess(){
+			var f = new FormData(document.getElementById('formExcel'));
+			$.ajax({
+				url: "<c:url value='/excel/uploadExcel.do'/>",
+				data: f,
+				processData: false,
+				contentType: false,
+				type: "POST",
+				success: function(data){
+					console.log(data);
+					if(data == 1){
+						alert("정상적으로 업로드 되었습니다.");
+						searchPgFunc(1);
+					}
+					
+				}
+			});
+		}
+	    
+		//엑셀 다운로드
+		//보통근데 엑셀 다운은 비동기로 처리하지 않는듯? 너무크니까?
+		function excelDownloadProcess(){
+			/*
+			document.formExcel.target = "hide_frame";
+			document.formExcel.action = "<c:url value='/excel/downloadExcel.do'/>";
+			document.formExcel.submit();
+			*/
+			
+			$.ajax({
+				url: "<c:url value='/excel/downloadExcel.do'/>",
+				//data: f,
+				processData: false,
+				contentType: false,
+				type: "POST",
+				xhrFields: {
+			        responseType: 'blob' // 응답을 Blob 객체로 받음. 이거 하려면 제이쿼리 버전이 3.3.1 이상이어야함
+			    },
+				success: function(data){
+					console.log(data);
+					
+					alert("파일 다운로드를 시작합니다." );
+					console.log("-----data------");
+					console.log(data);
+					var link = document.createElement('a');
+			        link.href = window.URL.createObjectURL(data);
+			        link.download = "mainList.xlsx"; // 다운로드시 저장되어 있는 파일이름으로 기본 다운로드 설정
+	                link.click();
+	                console.log("파일 다운로드 성공");
+					
+				}
+			});
+			
+		}
+
+
+		
 	</script>
 </head>
 <body>
@@ -158,7 +216,13 @@
 	</form>
 		<!-- security 예시 ROLE_ADMIN인 사용자만 보이게 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<button type="button" onclick="sendEmail()">메일보내기</button><br>
+			<form id="formExcel" name="formExcel" method="post" enctype="multipart/form-data" onsubmit="return false">
+				<input type="file" id="fileInput" name="fileInput">
+				<button type="button" onclick="excelUploadProcess()">엑셀업로드</button>
+				<button type="button" onclick="excelDownloadProcess()">엑셀다운로드</button>
+			</form>
+			
+			<button type="button" onclick="sendEmail()">메일보내기</button>  *메일보내기는 설정파일에 계정 정보 입력 필요<br>
 		</sec:authorize>
 		<button type="button" id="insertBoardBtn" onclick="selectDetail(0);"> 새글 등록</button>
 	<div id="totalCnt"></div>

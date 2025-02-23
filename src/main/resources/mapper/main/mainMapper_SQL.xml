@@ -16,7 +16,9 @@
 	  	AND TITLE LIKE '%'||#{title}||'%'
 	  </if>	
 	  ORDER BY SEQ DESC
-	  OFFSET (#{currentPage}-1)*#{pageSize} ROWS FETCH FIRST #{pageSize} ROWS ONLY
+	  <if test="currentPage != null and currentPage != ''">
+	  	OFFSET (#{currentPage}-1)*#{pageSize} ROWS FETCH FIRST #{pageSize} ROWS ONLY
+	  </if>
 	</select>
 	
 	<!-- 검색된 갯수 -->
