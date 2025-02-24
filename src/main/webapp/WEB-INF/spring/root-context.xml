@@ -57,4 +57,7 @@
 	    <constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	
+	<!-- AspectJ 라이브러리를 이용한 Proxy 객체를 생성 -->
+	<aop:aspectj-autoproxy />
+	
 </beans>

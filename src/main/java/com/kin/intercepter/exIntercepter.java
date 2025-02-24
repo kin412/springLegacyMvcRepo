@@ -19,9 +19,10 @@ public class exIntercepter extends HandlerInterceptorAdapter{
 			ModelAndView modelAndView) throws Exception {
 		
 		//log.info("--postHandle request.getRequestURI() : " + request.getRequestURI());
-		log.info("--request.getServletPath() : " + request.getServletPath());
+		log.info("request.getServletPath() : " + request.getServletPath());
 		//log.info("--request.getParameterMap().size() : " +request.getParameterMap().size());
 		//log.info("--modelAndView Name : " + modelAndView.getViewName());
+		
 		/*
         Enumeration<String> paramNames = request.getParameterNames();
        
