@@ -25,8 +25,8 @@
 	<!-- Trigger -->
 	<bean id="testJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 	    <property name="jobDetail" ref="testJob" />
-	    <!-- Trigger를 사용하여 1초 간격으로 실행되도록 지정했습니다. -->
-	    <property name="cronExpression" value="0/5 * * * * ?" />
+	    <!-- Trigger를 사용하여 1시간 -->
+	    <property name="cronExpression" value="0 0 0/1 * * ?" />
 	</bean>
     
 	<!-- Scheduler -->
