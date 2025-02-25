@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.google.gson.JsonObject;
 import com.kin.main.service.mainService;
@@ -43,7 +44,8 @@ public class mainController {
 	@RequestMapping(value = "/main/main.do")
 	public String main(@ModelAttribute mainVo mainVo, ModelMap modal, HttpServletRequest request) {
 		
-		System.out.println("--main/main.do");
+		log.info("--main/main.do");
+		
 		
 		//log예시
 		/*
@@ -64,13 +66,12 @@ public class mainController {
 			
 		}*/
 		
-		/*
-		 * 세션 설정 예시
-		HttpSession session = request.getSession();
-		session.setAttribute("testInfomation", "testInfomationValue");
-		
-		System.out.println("session : " + session.getAttribute("testInfomation"));
-		*/
+		//locale 세션 설정 -> headerTemplate로 넘김. 전체적으로 하는건 나중에
+		//HttpSession session = request.getSession();
+		//session.setAttribute("testInfomation", "testInfomationValue");
+		//System.out.println("session : " + session.getAttribute("testInfomation"));
+		//log.info("locale : " + session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
+		//modal.addAttribute("locale", session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
 		
 		return "main/main";
 	}

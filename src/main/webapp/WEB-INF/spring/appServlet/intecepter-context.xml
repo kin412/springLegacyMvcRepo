@@ -17,4 +17,14 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+	<!-- locale을 인터셉터에 설정할 경우
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	   <property name="paramName" value="language" />
+	</bean>
+	
+	<mvc:interceptors>
+	   <ref bean="localeChangeInterceptor"/>
+	 </mvc:interceptors>
+	-->
+
 </beans>
