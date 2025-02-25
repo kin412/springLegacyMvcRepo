@@ -13,7 +13,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 	    	console.log("--login ready--");
-	    	
+	    	$('#id').focus();
 	    });
 		
 		$(function() {
@@ -33,6 +33,15 @@
 			$.validator.addMethod("regex", function(value, element, regex){
 			  var regExp = new RegExp(regex);
 			  return regExp.test(value);
+			});
+			
+			//id에서 tab시 비밀번호로 이동
+			$('#id').keydown(function(e){
+				console.log("2");
+			        if ( e.keyCode === 9 && !e.shiftKey ) {
+			        	console.log("3");
+			            $('#submitBtn').focus();
+			        }
 			});
 			
 			//유효성 검증
@@ -176,14 +185,14 @@
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<tr>
 					<td>ID</td>
-					<td><input type="text" name="id"></td>
+					<td><input type="text" id="id" name="id"></td>
 					<td rowspan='2'>
-						<button type="submit">로그인</button>
+						<button type="submit" id="submitBtn">로그인</button>
 					</td>
 				</tr>
 				<tr>
 					<td>PW</td>
-					<td><input type="password" name="pw"></td>
+					<td><input type="password" id="pw" name="pw"></td>
 					<td>
 						
 					</td>
