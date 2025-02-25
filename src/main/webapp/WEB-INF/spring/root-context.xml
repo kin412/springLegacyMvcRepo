@@ -6,13 +6,15 @@
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
-		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
@@ -59,5 +61,13 @@
 	
 	<!-- AspectJ 라이브러리를 이용한 Proxy 객체를 생성 -->
 	<aop:aspectj-autoproxy />
+	
+	<!-- Transaction 설정 -->
+	<!-- 4. Transaction 처리용 TransactionManager 등록 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 5. Transaction annotation 활성화 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>

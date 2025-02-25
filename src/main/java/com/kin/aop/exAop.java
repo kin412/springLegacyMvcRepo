@@ -28,7 +28,7 @@ public class exAop {
         //실행되는 함수 이름을 가져오고 출력
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        log.info("aspect : " + method.getName() + "메서드 실행");
+        log.info("실행 메서드 : " + method.getName());
 
         //메서드에 들어가는 매개변수 배열을 읽어옴
         Object[] args = joinPoint.getArgs();

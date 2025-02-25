@@ -6,11 +6,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.kin.comm.service.pagingVo;
 import com.kin.main.service.mainService;
 import com.kin.main.service.mainVo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class mainServiceImpl implements mainService {
 
@@ -54,32 +59,39 @@ public class mainServiceImpl implements mainService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = {Exception.class})
 	public Map<String, Object> createAndUpdateDetail(mainVo mainVo) {
 		
 		Map map = new HashMap<String, Object>();
 		int seq = mainVo.getSeq();
 		
-		if(seq != 0) {
-			//업데이트
-			int updateFlg = mapper.updateDetail(mainVo);
-			System.out.println("--updateFlg : " + updateFlg);
-			//mapper.search(mainVo);
-			if(updateFlg == 1) {
-				map.put("message", "수정이 완료되었습니다");
+		try {
+			if(seq != 0) {
+				//업데이트
+				int updateFlg = mapper.updateDetail(mainVo);
+				System.out.println("--updateFlg : " + updateFlg);
+				//mapper.search(mainVo);
+				if(updateFlg == 1) {
+					map.put("message", "수정이 완료되었습니다");
+				}else {
+					map.put("message", "수정이 실패했습니다.");
+				}
 			}else {
-				map.put("message", "수정이 실패했습니다.");
+				//등록
+				mapper.insertDetail(mainVo);
+				map.put("message", "등록이 완료되었습니다");
+				//마지막 글번호 가져오기
+				seq = mapper.maxSeq();
+				
 			}
-		}else {
-			//등록
-			mapper.insertDetail(mainVo);
-			map.put("message", "등록이 완료되었습니다");
-			//마지막 글번호 가져오기
-			seq = mapper.maxSeq();
 			
+			map.put("seq", seq);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.info("--------------------" + e.getMessage());
+            map.put("message", e.getMessage());
+			map.put("result", "FAIL");
 		}
-		
-		map.put("seq", seq);
-		
 		
 		return map;
 	}
