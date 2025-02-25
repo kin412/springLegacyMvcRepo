@@ -13,16 +13,24 @@ import lombok.extern.slf4j.Slf4j;
 public class errorController {
 
 	@RequestMapping(value = "/error/accessError.do")
-	public String login(HttpServletRequest request, Authentication auth) {
+	public String accessError(HttpServletRequest request, Authentication auth) {
 		
 		
-		System.out.println("--/error/accessError.do");
-		System.out.println("--auth : " + auth);
-		System.out.println("--_csrf : " + request.getParameter("_csrf"));
-		System.out.println("--id : " + request.getParameter("id"));
-		System.out.println("--pw : " + request.getParameter("pw"));
+		log.info("--/error/accessError.do");
+		log.info("--auth : " + auth);
+		log.info("--_csrf : " + request.getParameter("_csrf"));
+		log.info("--id : " + request.getParameter("id"));
+		log.info("--pw : " + request.getParameter("pw"));
 		
 		return "error/accessError";
+	}
+	
+	@RequestMapping(value = "/error/exceptionError.do")
+	public String exceptionError(HttpServletRequest request) {
+		
+		log.info("--/error/exceptionError.do");
+		
+		return "error/exceptionError";
 	}
 	
 }
