@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kin.menu.service.impl.menuMapper">
+
+	<!-- 전체 내용 조회 -->
+	<select id="menuList" resultType="menuVo" parameterType="authVo">
+	  SELECT ID,
+		   	 NVL(PARENT_ID,0) AS PARENT_ID,
+		     NAME,
+		     LIST_ORDER,
+		     NVL(MENU_URL, '0') AS MENU_URL
+	  FROM MENU
+	  WHERE MENU_VISIBLE='Y'
+	  <if test='auth != "ROLE_ADMIN"'>
+	  	AND ID != 1
+	  	AND NVL(PARENT_ID,0) !=1
+	  </if>
+	  START WITH PARENT_ID IS NULL <!-- 루트노드를 지정 -->
+	  CONNECT BY PRIOR ID = PARENT_ID
+	</select>
+
+</mapper>
