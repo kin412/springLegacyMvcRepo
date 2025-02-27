@@ -4,7 +4,6 @@
 lecture
 target
 pom.properties
-.classpath
 MANIFEST.MF
 
 ### Eclipse ###
@@ -51,7 +50,7 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
-.springBeans
+
 
 # Code Recommenders
 .recommenders/
@@ -74,10 +73,10 @@ local.properties
 .sts4-cache/
 
 # Eclipse Core
-.project
+
 
 # IDT-specific (Eclipse Java Development Tools)
-.classpath
+
 
 ### Java ###
 # Compiled class file
