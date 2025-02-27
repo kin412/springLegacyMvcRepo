@@ -156,7 +156,10 @@
 	    }
 		
 		function selectDetail(seq){
-			location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
+			
+			//location.href = "<c:url value='/main/selectDetail.do?seq="+seq+"'/>";
+			//crud를 막기위해 replace 사용.
+			location.replace("<c:url value='/main/selectDetail.do?seq="+seq+"'/>");
 		}
 		
 		//글삭제
@@ -171,8 +174,10 @@
 					var message = data.message;
 					
 					alert(message);
-					
-					location.href = "<c:url value='/main/main.do'/>";
+					//일반적인 redirect
+					//location.href = "<c:url value='/main/main.do'/>";
+					//crud를 막기위해 replace 사용.
+					location.replace("<c:url value='/main/main.do'/>");
 					
 				},
 				error: function (data, status, e) {
