@@ -70,7 +70,7 @@
 		
 		//조회
 		function searchPgFunc(currentPage){
-			console.log("--searchPgFunc")
+			console.log("--searchPgFunc");
 			$("#currentPage").val(currentPage);
 			
 	    	var queryString = $("#search_form").serializeArray();

@@ -46,6 +46,13 @@ public class mainController {
 		
 		log.info("--main/main.do");
 		
+		//log.info("-- p : " + request.getParameter("p"));
+		
+		//이 방식을 이용해서 새로고침 시 페이징 상황을 유지하려면, 조회를  rest가 아닌 동기로 처리해야한다.
+		//페이지를 바꿀때마다 url에 파라미터값을 계속 바꿔주면 된다.
+		//근데 그럼 조회할때마다 화면을 다들고 다녀야하는데 ? 일장일단이 있다.
+		modal.addAttribute("currentPage", request.getParameter("p"));
+		
 		
 		//log예시
 		/*
