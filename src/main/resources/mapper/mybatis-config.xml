@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	
+		<typeAlias alias="mainVo" type="com.kin.main.service.mainVo"/>
+		<typeAlias alias="memberVo" type="com.kin.member.service.memberVo"/>
+		<typeAlias alias="authVo" type="com.kin.member.service.authVo"/>
+		<typeAlias alias="adminFileTestVo" type="com.kin.adminFileTest.service.adminFileTestVo"/>
+		<typeAlias alias="menuVo" type="com.kin.menu.service.menuVo"/>
+		
+	</typeAliases>
+</configuration>
