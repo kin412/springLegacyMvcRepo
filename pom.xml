@@ -92,8 +92,8 @@
 			<version>1</version>
 		</dependency>
 				
-		<!-- Servlet -->
-		<dependency>
+		<!-- Servlet 제우스8 사용으로 tomcat으로 대체 -->
+		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
@@ -104,6 +104,24 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-servlet-api</artifactId>
+		    <version>8.5.93</version> <!-- 제우스8은 톰캣8 기반 -->
+		    <scope>provided</scope><!-- war빌드시 WEB-INF/lib에 포함되지 않음 -->
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-jsp-api</artifactId>
+		    <version>8.5.93</version>  <!-- 최신 톰캣8 버전에 맞게 변경 -->
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-el-api</artifactId>
+		    <version>8.5.93</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
